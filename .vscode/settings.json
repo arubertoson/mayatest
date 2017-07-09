@@ -1,0 +1,36 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.egg-info": true,
+        "**/.cache": true,
+        "**/__pycache__": true,
+        "**/*.pyc": true
+    },
+    "cSpell.enabledLanguageIds": [
+        "c",
+        "cpp",
+        "csharp",
+        "go",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "latex",
+        "markdown",
+        "php",
+        "plaintext",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ],
+  "python.unitTest.pyTestEnabled": true,
+  "python.unitTest.pyTestPath": "pytest",
+  "python.unitTest.pyTestArgs": [],
+  "python.autoComplete.extraPaths": [
+      "C:/Program Files/Autodesk/Maya2017/devkit/other/pymel/extras/completion/py"
+  ]
+}
