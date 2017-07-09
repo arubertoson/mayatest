@@ -7,7 +7,7 @@ from mayatest import mayaloc
 
 
 def test_create_and_return_dir_with_temp_app_dir():
-    maya_app_dir = os.environ['MAYA_APP_DIR']
+    maya_app_dir = os.environ.get('MAYA_APP_DIR', '')
     with mayaloc.temp_app_dir() as app_dir:
         local_appdir = app_dir
         assert os.path.exists(app_dir)

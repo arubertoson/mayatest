@@ -19,7 +19,7 @@ def create_and_return(*args):
 def temp_app_dir():
     """Create a clean maya app dir to perform tests from.
     """
-    maya_app_dir = os.environ['MAYA_APP_DIR']
+    maya_app_dir = os.environ.get('MAYA_APP_DIR', '')
     try:
         tmp_app_dir = create_and_return(
             tempfile.gettempdir(), 'maya_app_dir{0}'.format(str(uuid.uuid4())))
@@ -37,20 +37,15 @@ def clean_maya_environment():
     """
     restore = False
     with temp_app_dir():
-        if all(
-            [i in os.environ
-             for i in ('MAYA_SCRIPT_PATH', 'MAYA_MODULE_PATH')]):
-            restore = True
-            script_path = os.environ['MAYA_SCRIPT_PATH']
-            module_path = os.environ['MAYA_MODULE_PATH']
+        script_path = os.environ.get('MAYA_SCRIPT_PATH', '')
+        module_path = os.environ.get('MAYA_MODULE_PATH', '')
         try:
             os.environ['MAYA_SCRIPT_PATH'] = ''
             os.environ['MAYA_MODULE_PATH'] = ''
             yield
         finally:
-            if restore:
-                os.environ['MAYA_SCRIPT_PATH'] = script_path
-                os.environ['MAYA_MODULE_PATH'] = module_path
+            os.environ['MAYA_SCRIPT_PATH'] = script_path
+            os.environ['MAYA_MODULE_PATH'] = module_path
 
 
 def get_maya_location(version):
