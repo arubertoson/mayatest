@@ -55,12 +55,12 @@ def get_maya_location(version):
     If MAYA_LOCATION is present in system and/or user variables mayatest
     will use whatever is stored there.
     """
-    if 'MAYA_LOCATION' in os.environ.keys():
+    if 'MAYA_LOCATION' in os.environ:
         return os.environ['MAYA_LOCATION']
 
     try:
-        # NOTE: These paths are hardcoded after normal conventions, if
-        #   a need to have a dynamic solution present start here.
+        # NOTE: These paths are hardcoded after normal conventions, a
+        #   dynamic solutuion is presently not possible.
         location = {
             'Windows': 'C:/Program Files/Autodesk/Maya{0}',
             'Darwin': '/Applications/Autodesk/maya{0}/Maya.app/Contents',
