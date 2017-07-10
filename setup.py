@@ -16,7 +16,7 @@ try:
     with open('README.rst') as rst:
         description = rst.read()
     os.remove('README.rst')
-except IOError:
+except (IOError, ImportError):
     with open(os.path.join(here, 'README.md'), 'r') as f:
         description = f.read()
 
