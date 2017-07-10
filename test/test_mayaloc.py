@@ -19,7 +19,7 @@ def test_create_and_return():
 
 
 def test_temp_app_dir():
-    maya_app_dir = os.environ.get('MAYA_APP_DIR', 'test_app_dir')
+    maya_app_dir = os.environ.setdefault('MAYA_APP_DIR', 'test_app_dir')
     with mayaloc.temp_app_dir() as tmp_dir:
         tmp_app_dir = tmp_dir
         assert os.path.exists(os.environ['MAYA_APP_DIR'])
