@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/arubertoson/mayatest.svg?branch=master)](https://travis-ci.org/arubertoson/mayatest)
 [![Coverage Status](https://coveralls.io/repos/github/arubertoson/mayatest/badge.svg?branch=master)](https://coveralls.io/github/arubertoson/mayatest?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/arubertoson/mayatest/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/arubertoson/mayatest/?branch=master)
+[![PyPI version](https://badge.fury.io/py/mayatest.svg)](https://badge.fury.io/py/mayatest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Wrapper to easily test maya scripts and modules with the powerful pytest framework.

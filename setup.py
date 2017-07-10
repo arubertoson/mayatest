@@ -30,7 +30,7 @@ setup(
     url='https://github.com/arubertoson/mayatest',
     license='MIT',
     packages=['mayatest'],
-    install_requires=['pytest'],
+    install_requires=['pytest', 'mock'],
     include_package_data=True,
     zip_safe=False,
     entry_points={'console_scripts': ['mayatest = mayatest.cli:main']},

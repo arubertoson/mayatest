@@ -4,6 +4,7 @@ Tests for mayatest.cli
 pytest
 """
 import os
+import mock
 import pytest
 
 from mayatest import cli
@@ -27,7 +28,9 @@ def test_args_parser_pytest():
 
 def test_construct_command():
     parser = cli.args_parser(['-m', '2017', '--pytest="--cov=./"'])
-    cmd = cli.construct_command(parser)
+    with mock.patch('os.path.isfile') as mock_isfile:
+        mock_isfile.return_value = True
+        cmd = cli.construct_command(parser)
 
     mayapy_path = mayaloc.mayapy(parser.maya)
     pytest_path = os.path.abspath(os.path.normpath(pytest.__file__))
