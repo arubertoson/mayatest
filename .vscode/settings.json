@@ -30,6 +30,9 @@
   "python.unitTest.pyTestEnabled": true,
   "python.unitTest.pyTestPath": "pytest",
   "python.unitTest.pyTestArgs": [],
+  "python.linting.pylintArgs": [
+      "--disable=C0111"
+  ],
   "python.autoComplete.extraPaths": [
       "C:/Program Files/Autodesk/Maya2017/devkit/other/pymel/extras/completion/py"
   ]

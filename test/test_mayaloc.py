@@ -1,4 +1,7 @@
 """
+Tests for mayatest.mayaloc
+
+pytest
 """
 import os
 import platform
@@ -6,17 +9,35 @@ import platform
 from mayatest import mayaloc
 
 
-def test_create_and_return_dir_with_temp_app_dir():
-    maya_app_dir = os.environ.get('MAYA_APP_DIR', '')
-    with mayaloc.temp_app_dir() as app_dir:
-        local_appdir = app_dir
-        assert os.path.exists(app_dir)
-        assert os.environ['MAYA_APP_DIR'] == app_dir
-    assert os.path.exists(local_appdir) is False
+def test_create_and_return():
+    import uuid
+    import tempfile
+    test_dir = os.path.join(tempfile.gettempdir(), str(uuid.uuid4()))
+    assert not os.path.exists(test_dir)
+    created_dir = mayaloc.create_and_return(test_dir)
+    assert os.path.exists(created_dir)
+
+
+def test_temp_app_dir():
+    maya_app_dir = os.environ.get('MAYA_APP_DIR', 'test_app_dir')
+    with mayaloc.temp_app_dir() as tmp_dir:
+        tmp_app_dir = tmp_dir
+        assert os.path.exists(os.environ['MAYA_APP_DIR'])
     assert os.environ['MAYA_APP_DIR'] == maya_app_dir
+    assert not os.path.exists(tmp_app_dir)
 
 
-def test_system_return_maya_location():
+def test_clean_maya_environment():
+    script_path = os.environ.setdefault('MAYA_SCRIPT_PATH', 'test_script')
+    module_path = os.environ.setdefault('MAYA_MODULE_PATH', 'test_module')
+    with mayaloc.clean_maya_environment():
+        assert os.environ['MAYA_SCRIPT_PATH'] == ''
+        assert os.environ['MAYA_MODULE_PATH'] == ''
+    assert os.environ['MAYA_SCRIPT_PATH'] == script_path
+    assert os.environ['MAYA_MODULE_PATH'] == module_path
+
+
+def test_get_maya_location():
     test_version = 2016
     location = mayaloc.get_maya_location(test_version)
 
@@ -35,7 +56,7 @@ def test_system_return_maya_location():
         assert location == unixpath
 
 
-def test_system_mayapy_executable_location():
+def test_mayapy():
     test_version = 2017
     mayapy_executable = mayaloc.mayapy(test_version)
     if platform.system() == 'Windows':

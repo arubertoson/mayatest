@@ -11,30 +11,32 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 # Get long description
 try:
-    with open(os.path.join(here, 'README.md'), 'r') as f:
-        long_description = f.read()
+    import pypandoc
+    pypandoc.convert_file('README.md', 'rst', outputfile='README.rst')
+    with open('README.rst') as rst:
+        description = rst.read()
+    os.remove('README.rst')
 except IOError:
-    pass
+    with open(os.path.join(here, 'README.md'), 'r') as f:
+        description = f.read()
 
 setup(
     name='mayatest',
-    version='0.1.0',
+    version='0.1.1',
     description='Test Autodesk Maya scripts and modules with pytest',
-    long_description=long_description,
+    long_description=description,
     author='Marcus Albertsson',
     author_email='marcus.arubertoson@gmail.com',
     url='https://github.com/arubertoson/mayatest',
     license='MIT',
-    py_modules=['mayatest'],
+    packages=['mayatest'],
     install_requires=['pytest'],
     include_package_data=True,
     zip_safe=False,
-    entry_points={
-        'console_scripts': ['mayatest = mayatest.cli:main']},
+    entry_points={'console_scripts': ['mayatest = mayatest.cli:main']},
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 2.7',
         'Intended Audience :: End Users/Desktop',
         'Environment :: Console',
-    ],
-)
+    ])

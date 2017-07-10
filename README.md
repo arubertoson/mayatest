@@ -17,13 +17,25 @@ You'll need to install:
 
 ### Installing
 
-```
+```bash
 pip install mayatest
 ```
 
 ### Usage
 
-End with an example of getting some data out of the system or using it for a little demo
+Run mayatest in the folder of the script or module.
+
+```bash
+# To invoke pytest using mayapy from Maya 2017 do:
+mayatest -m 2017
+
+# Then the normal usage for pytest applies, e.g. to test specific  file:
+mayatest -m 2017 --pytest="test_sometest.py"
+# to only run test_func
+mayatest -m 2017 --pytest="test_sometest.py::test_func"
+```
+
+For more information using pytest go to their [docs](https://docs.pytest.org/en/latest/usage.html).
 
 
 ## License

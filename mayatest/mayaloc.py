@@ -17,7 +17,8 @@ def create_and_return(*args):
 
 @contextmanager
 def temp_app_dir():
-    """Create a clean maya app dir to perform tests from.
+    """Contextmanager to create and remove a temporary app dir to perform
+    our tests from.
     """
     maya_app_dir = os.environ.get('MAYA_APP_DIR', '')
     try:
@@ -32,8 +33,8 @@ def temp_app_dir():
 
 @contextmanager
 def clean_maya_environment():
-    """Contextmanager to clean maya environment variables to ensure a
-    clean run.
+    """Contextmanager to reset necessary environment values for a clean
+    run, then restore overwritten values.
     """
     restore = False
     with temp_app_dir():
@@ -50,11 +51,16 @@ def clean_maya_environment():
 
 def get_maya_location(version):
     """Find the location of maya installation
+
+    If MAYA_LOCATION is present in system and/or user variables mayatest
+    will use whatever is stored there.
     """
     if 'MAYA_LOCATION' in os.environ.keys():
         return os.environ['MAYA_LOCATION']
 
     try:
+        # NOTE: These paths are hardcoded after normal conventions, if
+        #   a need to have a dynamic solution present start here.
         location = {
             'Windows': 'C:/Program Files/Autodesk/Maya{0}',
             'Darwin': '/Applications/Autodesk/maya{0}/Maya.app/Contents',
@@ -69,7 +75,6 @@ def get_maya_location(version):
 
 def mayapy(version):
     """Find the mayapy executable path.
-
     """
     mayapy_executable = '{0}/bin/mayapy'.format(get_maya_location(version))
     if platform.system() == 'Windows':
