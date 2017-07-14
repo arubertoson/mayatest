@@ -22,7 +22,7 @@ except (IOError, ImportError):
 
 setup(
     name='mayatest',
-    version='0.1.1',
+    version='0.1.2',
     description='Test Autodesk Maya scripts and modules with pytest',
     long_description=description,
     author='Marcus Albertsson',
