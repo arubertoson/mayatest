@@ -1,11 +1,20 @@
 language: python
 python:
-  - "2.7"
-  - "3.6"
+- '2.7'
+- '3.6'
 install:
-  - pip install .
-  - pip install coveralls pytest-cov
+- pip install .
+- pip install coveralls pytest-cov
 script:
-  - python -m pytest --cov=mayatest
+- python -m pytest --cov=mayatest
 after_success:
-  - coveralls
+- coveralls
+deploy:
+  provider: pypi
+  user: arubertoson
+  password:
+    secure: ZUDQxddCrzan1Kp/By4SHx4AJFt1e2gOIJIrGr0KMECD+HRXT4rVAPrrEc3lgn4HtqP85La7/Ir2lSX++Wb/vuw/+4lpd053aBUxyB+5K0M4Mf9xZlRfaWiFheCcSoROHg7kMV5+cQIkUKsh8QFbSzwWjA33xF+uouwe72d+0oRHoZO+g2fcMgS1AyURdVl5I6bYX+iHDZq5Hw6Mj8B0AXYwPhDBzq4/jhse7mtDzaX7BKAK24g55g8AvEpGSCL28vtW1NFRNOEMUVnhk93cIy3OVohmdZEdCFXEnWTgXOB0gsJkYN4k/yZD5z38A9oA/U9mjWhLFyK4qGL5Apz/bG6xQxYmygltTOW7AdF3PEW9IPvhZ7A3B5SSjuRLwsaKdtln6/lSrcmd1W3fnoS/y3X5PLbpUeo5s6eYwol+H99CUBkpOkuo1NAAH/R7Y4yQSKo31BDTkMYzqfiH8uAKWn07YROaGftUbtUDQgpo+P/i8CpumvAWIXT51pvKNzVEDXhwElF4IEBKNrzi20gd8xNPr65x+s3lLRqotXiu07KcRoaYy7nmn35yzCeznHOwyam3vwnMhRWYpzxsCUMdVirH80NefJNGWh/gwxn96a9TJ9cG0AfvFpAJ6whSIVfEcJu1Tp+DLIAy3QD6ByxqN+C0mELOB/N1JYGWfB2qwqg=
+  distributions: "sdist bdist_wheel"
+  on:
+    tags: true
+    repo: arubertoson/mayatest
