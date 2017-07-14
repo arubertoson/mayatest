@@ -4,6 +4,7 @@ Tests for mayatest.mayaloc
 pytest
 """
 import os
+import tempfile
 import platform
 
 from mayatest import mayaloc
@@ -63,3 +64,10 @@ def test_mayapy():
         assert mayapy_executable.endswith('/bin/mayapy.exe')
     else:
         assert mayapy_executable.endswith('/bin/mayapy')
+
+
+def test_is_maya_module_modfile():
+    assert not mayaloc.is_maya_module()
+    with tempfile.NamedTemporaryFile(suffix='.mod', dir='./'):
+        assert mayaloc.is_maya_module()
+

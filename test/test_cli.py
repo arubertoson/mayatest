@@ -9,6 +9,7 @@ import pytest
 
 from mayatest import cli
 from mayatest import mayaloc
+from mayatest import runner
 
 
 def test_args_parser_maya():
@@ -34,13 +35,13 @@ def test_construct_command():
 
     mayapy_path = mayaloc.mayapy(parser.maya)
     pytest_path = os.path.abspath(os.path.normpath(pytest.__file__))
-    assert cmd == [mayapy_path, pytest_path, parser.pytest]
+    assert cmd == [mayapy_path, runner.__file__, pytest_path, parser.pytest]
 
 
 def test_construct_command_no_mayapy_file():
     for version in range(2014, 2020):
         if not os.path.isfile(mayaloc.mayapy(version)):
             parser = cli.args_parser(['-m', '{0}'.format(version)])
-            with pytest.raises(RuntimeError) as e_info:
-                cmd = cli.construct_command(parser)
+            with pytest.raises(RuntimeError):
+                cli.construct_command(parser)
                 break

@@ -1,12 +1,18 @@
 """
+cli takes the given arguments and create a test call performed by the
+given mayapy version.
 """
 import os
 import sys
 import argparse
 import subprocess
 
-import pytest
-from mayatest import mayaloc
+try:
+    import pytest
+except ImportError:
+    pytest = None
+
+from mayatest import mayaloc, runner
 
 
 def args_parser(args):
@@ -15,7 +21,7 @@ def args_parser(args):
     parser.add_argument(
         '-m', '--maya', help='Maya version', type=int, default=2016)
     parser.add_argument(
-        '-py', '--pytest', help='pytest extra args', type=str)
+        '-py', '--pytest', help='pytest extra args', type=str, default='')
     return parser.parse_args(args)
 
 
@@ -25,9 +31,9 @@ def construct_command(pargs):
         raise RuntimeError(
             'Maya {0} is not installed on the system'.format(pargs.maya))
 
-    cmd = [mayapy, os.path.normpath(os.path.realpath(pytest.__file__))]
-    if pargs.pytest:
-        cmd.append(pargs.pytest)
+    cmd = [mayapy, runner.__file__]
+    cmd.append(None if pytest is None else pytest.__file__)
+    cmd.append(pargs.pytest)
     return cmd
 
 
