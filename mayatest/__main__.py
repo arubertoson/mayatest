@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 """
+Used as entry point for mayatest from commandline
 """
 
 if __name__ == "__main__":
