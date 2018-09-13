@@ -34,6 +34,8 @@ mayatest -m 2017
 mayatest -m 2017 --pytest="test_sometest.py"
 # to only run test_func
 mayatest -m 2017 --pytest="test_sometest.py::test_func"
+# to get verbose results, you can include pytest flags
+mayatest -m 2017 --pytest="-vvv test_sometest.py"
 ```
 
 For more information using pytest go to their [docs](https://docs.pytest.org/en/latest/usage.html).
