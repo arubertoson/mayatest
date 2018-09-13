@@ -4,6 +4,7 @@ python site-packages
 """
 import os
 import sys
+import shlex
 
 try:
     import pytest
@@ -40,8 +41,8 @@ class PytestMayaPlugin(object):
 
 
 def main():
-    pytest_args = sys.argv[2]
-    pytest.main([pytest_args], plugins=[PytestMayaPlugin()])
+    pytest_args = shlex.split(sys.argv[2])
+    pytest.main(pytest_args, plugins=[PytestMayaPlugin()])
 
 
 if __name__ == '__main__':
